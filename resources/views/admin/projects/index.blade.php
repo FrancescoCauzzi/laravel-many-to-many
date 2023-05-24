@@ -12,7 +12,8 @@
             <th>Slug</th>
             <th>Type</th>
             <th>Technologies</th>
-            <th>Commands</th>
+            <th>Show</th>
+            <th>Edit</th>
         </thead>
         <tbody>
             @foreach ($projects as $project)
@@ -24,10 +25,10 @@
                 <td>
                     @foreach ($project->technologies as $tech)
                     <span class="mx-1">{{$tech->name}}</span>
-
                     @endforeach
                 </td>
                 <td class="text-center"><a href="{{route('admin.projects.show', ['project' => $project])}}"><i class="fa-solid fa-magnifying-glass"></i></a></td>
+                <td class="text-center"><a href="{{route('admin.projects.edit', ['project' => $project])}}"><i class="fa-solid fa-file-pen"></a></td>
 
             </tr>
 
