@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
-// use App\Http\Requests\StoreTechnologyRequest;
-// use App\Http\Requests\UpdateTechnologyRequest;
+// use App\Http\Requests\Request;
+// use App\Http\Requests\Request;
 
 use App\Http\Controllers\Controller;
 use App\Models\Technology;
@@ -39,7 +39,7 @@ class TechnologyController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreTechnologyRequest  $request
+     * @param  \App\Http\Requests\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -72,7 +72,7 @@ class TechnologyController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateTechnologyRequest  $request
+     * @param  \App\Http\Requests\Request  $request
      * @param  \App\Models\Technology  $technology
      * @return \Illuminate\Http\Response
      */
