@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Technology extends Model
 {
     use HasFactory;
+
+    public function projects()
+    {
+        // Many-to-Many relationship between projects and technologies
+        // The pivot table is called project_technology
+        // each technology can be used in multiple projects (Project entity here)
+        return $this->belongsToMany(Project::class);
+    }
 }

@@ -8,6 +8,7 @@ use App\Models\Type;
 
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
+use App\Models\Technology;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 // Str support module import
@@ -35,8 +36,9 @@ class ProjectController extends Controller
     public function create(Project $project)
     {
         $types = Type::all();
+        $technologies = Technology::all();
         $statuses = ['pending', 'in progress', 'completed'];
-        return view('admin.projects.create', compact('project', 'types', 'statuses'));;
+        return view('admin.projects.create', compact('project', 'types', 'statuses', 'technologies'));
     }
 
     /**
@@ -57,9 +59,13 @@ class ProjectController extends Controller
         $newProject->fill($formData);
         $newProject->slug = Str::slug($formData['name']); // Assign the slug value based on the 'name' attribute
 
-
-
+        // save must be done before the pivot table insertion, because when we save the row in the db the id gets created
         $newProject->save();
+
+        // insert the technologies relative to the project in the pivot table
+        if (array_key_exists('technologies', $formData)) {
+            $newProject->technologies()->attach($formData['technologies']);
+        }
 
         return redirect()->route('admin.projects.show', $newProject->slug);
     }
@@ -85,7 +91,9 @@ class ProjectController extends Controller
     {
         $types = Type::all();
         $statuses = ['pending', 'in progress', 'completed'];
-        return view('admin.projects.edit', compact('project', 'types', 'statuses'));
+        $technologies = Technology::all();
+
+        return view('admin.projects.edit', compact('project', 'types', 'statuses', 'technologies'));
     }
 
     /**
@@ -105,6 +113,13 @@ class ProjectController extends Controller
         $project->slug = Str::slug($formData['name']); // Assign the slug value based on the 'name' attribute
 
         $project->save();
+        // sync the technologies relative to the project in the pivot table
+        if (array_key_exists('technologies', $formData)) {
+            $project->technologies()->sync($formData['technologies']);
+        } else {
+            // if the technologies are not selected, we delete the respective rows in the pivot table
+            $project->technologies()->detach();
+        }
 
         return redirect()->route('admin.projects.show', $project->slug);
     }

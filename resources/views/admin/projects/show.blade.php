@@ -7,6 +7,16 @@
     <div class="__proj-type">
         <h6>Project Type: {{ $project->type->name ?? 'not specified'}}</h6>
     </div>
+    @if (count($project->technologies) >0)
+
+    <div class="__proj-tech">
+        <h6>Project Technologies:</h6>
+        @foreach ($project->technologies as $tech )
+        <span class="badge rounded-pill bg-primary">{{$tech->name}}</span>
+
+        @endforeach
+    </div>
+    @endif
     <div class="__proj-description">
         <h4>Description</h4>
         <p>

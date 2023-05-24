@@ -11,6 +11,7 @@
             <th>Description</th>
             <th>Slug</th>
             <th>Type</th>
+            <th>Technologies</th>
             <th>Commands</th>
         </thead>
         <tbody>
@@ -20,6 +21,12 @@
                 <td>{{$project->description}}</td>
                 <td>{{$project->slug}}</td>
                 <td>{{$project->type?->name}}</td>
+                <td>
+                    @foreach ($project->technologies as $tech)
+                    <span class="mx-1">{{$tech->name}}</span>
+
+                    @endforeach
+                </td>
                 <td class="text-center"><a href="{{route('admin.projects.show', ['project' => $project])}}"><i class="fa-solid fa-magnifying-glass"></i></a></td>
 
             </tr>

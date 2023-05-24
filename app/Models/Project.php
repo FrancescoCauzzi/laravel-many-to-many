@@ -15,4 +15,12 @@ class Project extends Model
     {
         return $this->belongsTo(Type::class);
     }
+
+    public function technologies()
+    {
+        // Many-to-Many relationship between projects and technologies
+        // The pivot table is called projects_technologies
+        // each project can have multiple technologies (Technology entity here)
+        return $this->belongsToMany(Technology::class);
+    }
 }

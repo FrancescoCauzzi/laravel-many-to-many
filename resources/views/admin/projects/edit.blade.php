@@ -34,7 +34,26 @@
           {{$message}}
         </div>
       @enderror
-      </div>
+    </div>
+
+    <div class="mb-3">
+        <h6>Technologies</h6>
+        <div class="row">
+            @foreach ($technologies as $tech)
+            <div class="col-lg-3 col-md-6 col-sm-12">
+                <div class="form-check">
+                    <input type="checkbox" id="technology-{{$tech->id}}" name="technologies[]" value="{{$tech->id}}" @checked($project->technologies->contains($tech))>
+                    <label for="technology-{{$tech->id}}">{{$tech->name}}</label>
+                </div>
+            </div>
+            @endforeach
+        </div>
+        @error('technology_id')
+        <div class="invalid-feedback">
+          {{$message}}
+        </div>
+        @enderror
+    </div>
 
     <div class="mb-3">
       <label for="description">Description</label>
