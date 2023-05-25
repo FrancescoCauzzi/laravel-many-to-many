@@ -17,7 +17,7 @@
             <thead>
                 <th>Project name</th>
                 <th>Slug</th>
-                <th>Actions</th>
+                <th class="text-center">Edit</th>
             </thead>
             <tbody>
                 @foreach($type->projects as $project)
@@ -28,7 +28,7 @@
                     <td>
                         {{$project->slug}}
                     </td>
-                    <td>
+                    <td class="text-center">
                         <a class="fw-bold" href="{{route('admin.projects.edit', ['project' => $project->slug])}}"><i class="fa-solid fa-file-pen"></i></a>
                     </td>
                 </tr>

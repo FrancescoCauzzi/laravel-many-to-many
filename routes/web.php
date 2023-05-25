@@ -27,7 +27,7 @@ Route::get('/', function () {
 Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(function () {
     // route to dashboard
     Route::get('/', [DashboardController::class, 'home'])->name('dashboard.home');
-    //route to projects
+    //route to projects (aggiungiamo il parametro slug e non più l'id)
     Route::resource('projects', ProjectController::class)->parameters(['projects' => 'project:slug']);
     // route to types
     Route::resource('types', TypeController::class)->parameters(['types' => 'type:slug']);

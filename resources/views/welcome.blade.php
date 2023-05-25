@@ -13,7 +13,7 @@
                 Welcome to Boolfolio
             </h1>
 
-            <p class="col-md-8 fs-4">This is a web application to manage IT projects</p>
+            <p class="col-md-8 fs-4">This is my web application that present my projects during the Boolean-Web-Developer course</p>
         </div>
         <div class="__image">
             <img src="{{Vite::asset('resources/img/jumbo-image.jpg')}}" alt="">

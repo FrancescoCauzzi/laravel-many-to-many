@@ -25,8 +25,12 @@ class ProjectSeeder extends Seeder
 
         for ($i = 0; $i < 10; $i++) {
             Project::create([
-                'name' => $name = $faker->sentence(3), // Store the generated name in a variable
-                'slug' => Str::slug($name, '-'), // Use the stored name variable for slug generation
+                // Store the generated name in a variable
+                'name' => $name = $faker->sentence(3),
+
+                // Use the stored name variable for slug generation
+                'slug' => Str::slug($name, '-'),
+
                 'description' => $faker->text(),
                 'start_date' => now(),
                 'end_date' => $faker->dateTimeBetween('now', '+3 years'),

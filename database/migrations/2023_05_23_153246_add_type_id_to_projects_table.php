@@ -33,6 +33,7 @@ return new class extends Migration
     {
         Schema::table('projects', function (Blueprint $table) {
             // syntax: table name, field name, foreign
+            // we want to remove down here the foreign key from the projects table
             $table->dropForeign('projects_type_id_foreign');
             // drop the column
             $table->dropColumn('type_id');

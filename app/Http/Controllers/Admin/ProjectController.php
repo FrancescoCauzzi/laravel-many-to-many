@@ -24,6 +24,7 @@ class ProjectController extends Controller
      */
     public function index()
     {
+        // metodo statico che restituisce tutti i progetti del db
         $projects = Project::all();
         return view('admin.projects.index', compact('projects'));
     }
@@ -54,10 +55,13 @@ class ProjectController extends Controller
         $formData = $request->all();
         //$formData['budget'] = '$' . number_format($formData['budget'], 2);
 
-
         $newProject = new Project();
+
+        // we use the fill method to fill the model with the data from the request, in the model we must specify the fillable attributes
         $newProject->fill($formData);
-        $newProject->slug = Str::slug($formData['name']); // Assign the slug value based on the 'name' attribute
+
+        // Assign the slug value based on the 'name' attribute
+        $newProject->slug = Str::slug($formData['name']);
 
         // save must be done before the pivot table insertion, because when we save the row in the db the id gets created
         $newProject->save();

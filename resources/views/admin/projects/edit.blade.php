@@ -2,7 +2,7 @@
 
 @section('content')
 <div class=" __create-ctn text-white">
-  <h1>Edit a project</h1>
+  <h1>Edit this project</h1>
 
   <form action="{{route('admin.projects.update', $project->slug)}}" method="POST" class="">
     @csrf
@@ -42,7 +42,7 @@
             @foreach ($technologies as $tech)
             <div class="col-lg-3 col-md-6 col-sm-12">
                 <div class="form-check">
-                    <input type="checkbox" id="technology-{{$tech->id}}" name="technologies[]" value="{{$tech->id}}" @checked($project->technologies->contains($tech))>
+                    <input type="checkbox" id="technology-{{$tech->id}}" name="technologies[]" value="{{$tech->id}}" @checked($project->technologies->contains($tech)) >
                     <label for="technology-{{$tech->id}}">{{$tech->name}}</label>
                 </div>
             </div>
