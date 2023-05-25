@@ -18,9 +18,7 @@ return new class extends Migration
             $table->string('name', 255)->unique(); // make name unique
             $table->string('slug', 255);
             $table->text('description');
-            $table->date('start_date');
-            $table->date('end_date');
-            $table->enum('status', ['pending', 'in progress', 'completed']);
+            $table->string('repository');
             $table->timestamps();
         });
     }

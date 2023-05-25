@@ -24,17 +24,16 @@
         </p>
     </div>
 
-    <div class="__proj-timeline">
-        <h4>The timeline of the project:</h4>
-        <p class="fw-bold">
-            <span >Start: </span>
-            <span>{{date("F j, Y", strtotime($project->start_date))}}</span><span>, until: </span><span>{{date("F j, Y", strtotime($project->end_date))}}</span>
-        </p>
+    <div class="__repository-url">
+        <h4>Repository:</h4>
+        <div class="">
+            {{-- In HTML, the target="_blank" attribute is used to specify that a link should open in a new browser window or tab when clicked. When you set the target attribute to _blank, the linked document or URL will be loaded into a new browsing context, separate from the current page. --}}
+          <a href="{{$project->repository}}" target="_blank">Github</a>
+        </div>
     </div>
-    <div class="__proj__status">
-        <h4>Status of the project:</h4>
-        <span class="fw-bold">{{ucwords($project->status)}}</span>
-    </div>
+
+
+
 
 
     <div class="__btns-ctn d-flex gap-5">

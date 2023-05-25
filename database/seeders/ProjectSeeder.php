@@ -32,9 +32,7 @@ class ProjectSeeder extends Seeder
                 'slug' => Str::slug($name, '-'),
 
                 'description' => $faker->text(),
-                'start_date' => now(),
-                'end_date' => $faker->dateTimeBetween('now', '+3 years'),
-                'status' => ['pending', 'in progress', 'completed'][array_rand(['pending', 'in progress', 'completed'])],
+                'repository' => $faker->url(),
 
 
             ]);

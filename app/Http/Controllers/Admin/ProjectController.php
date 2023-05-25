@@ -38,8 +38,8 @@ class ProjectController extends Controller
     {
         $types = Type::all();
         $technologies = Technology::all();
-        $statuses = ['pending', 'in progress', 'completed'];
-        return view('admin.projects.create', compact('project', 'types', 'statuses', 'technologies'));
+
+        return view('admin.projects.create', compact('project', 'types', 'technologies'));
     }
 
     /**
@@ -50,9 +50,9 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validation($request);
-        // Perform an authorization check
         $formData = $request->all();
+        // Perform an authorization check
+        $this->validation($formData);
         //$formData['budget'] = '$' . number_format($formData['budget'], 2);
 
         $newProject = new Project();
@@ -82,7 +82,7 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
-        return view('admin/projects/show', compact('project'));
+        return view('admin.projects.show', compact('project'));
     }
 
     /**
@@ -94,10 +94,8 @@ class ProjectController extends Controller
     public function edit(Project $project)
     {
         $types = Type::all();
-        $statuses = ['pending', 'in progress', 'completed'];
         $technologies = Technology::all();
-
-        return view('admin.projects.edit', compact('project', 'types', 'statuses', 'technologies'));
+        return view('admin.projects.edit', compact('project', 'types', 'technologies'));
     }
 
     /**
@@ -109,15 +107,15 @@ class ProjectController extends Controller
      */
     public function update(Request $request, Project $project)
     {
-        $this->validation($request);
 
         $formData = $request->all();
-        $project->update($formData);
+        $this->validation($formData);
 
         // Assign the slug value based on the 'name' attribute
-        $project->slug = Str::slug($formData['name']);
+        $project->slug = Str::slug($formData['name'], '-');
 
-        $project->save();
+        $project->update($formData);
+
         // sync the technologies relative to the project in the pivot table
         if (array_key_exists('technologies', $formData)) {
             $project->technologies()->sync($formData['technologies']);
@@ -126,7 +124,7 @@ class ProjectController extends Controller
             $project->technologies()->detach();
         }
 
-        return redirect()->route('admin.projects.show', $project->slug);
+        return redirect()->route('admin.projects.show', compact('project'));
     }
 
     /**
@@ -142,19 +140,13 @@ class ProjectController extends Controller
         return redirect()->route('admin.projects.index');
     }
     // custom method
-    private function validation($request)
+    private function validation($formData)
     {
-        // dobbiamo prendere solo i parametri del form, utilizziamo quindi il metodo all()
-        $formData = $request->all();
-
-
         $validator = Validator::make($formData, [
 
-            'name' => 'required|max:50|min:6',
+            'name' => 'required|max:50',
             'description' => 'required',
-            'start_date' => 'required',
-            'end_date' => 'required',
-            'status' => 'required|max:20',
+            'repository' => 'required|max:255',
             'type_id' => 'nullable|exists:types,id',
             'technologies' => 'exists:technologies,id',
 
@@ -163,11 +155,9 @@ class ProjectController extends Controller
             // dobbiamo inserire qui un insieme di messaggi da comunicare all'utente per ogni errore che vogliamo modificare
             'name.required' => 'The project name must be inserted',
             'name.max' => 'The project name must be longer than 50 characters',
-            'name.min' => 'The project name must be at least 6 characters',
             'description.required' => "The project description must be inserted",
-            'start_date.required' => "The start date must be inserted",
-            'end_date.required' => "The end date must be inserted",
-            'status.required' => "The status of the project must be inserted",
+            'repository.required' => 'The link of the repository must be inserted',
+            'repository.max' => 'The link of the repository must be shorter than 255 characters',
             'type_id.exists' => 'The project type must be selected',
             'technologies.exists' => 'The project technology must be selected',
 

@@ -70,40 +70,14 @@
     </div>
 
     <div class="mb-3">
-      <label for="start_date">Start date</label>
-      <input class="form-control @error('start_date') is-invalid @enderror" type="date" name="start_date" id="start_date" value="{{old('start_date') ?? $project->start_date}}">
-      @error('start_date')
-        <div class="invalid-feedback">
-          {{$message}}
-        </div>
-      @enderror
-    </div>
-
-    <div class="mb-3">
-        <label for="end_date">End date</label>
-        <input class="form-control @error('end_date') is-invalid @enderror" type="date" name="end_date" id="end_date" value="{{ old('end_date')  ?? $project->end_date}}">
-        @error('end_date')
-        <div class="invalid-feedback">
-          {{$message}}
-        </div>
-      @enderror
-    </div>
-
-    <div class="mb-3">
-        <label for="status">Status</label>
-        <select class="form-select @error('status') is-invalid @enderror" name="status" id="">
-
-          @foreach ($statuses as $index => $status)
-              <option value="{{ $status }}" {{ $status == old('status') ? 'selected' : '' }}>{{ $status }}</option>
-          @endforeach
-
-      </select>
-        @error('status')
+        <label for="repository">Repository</label>
+        <input class="form-control @error('repository') is-invalid @enderror" type="text" id="repository" name="repository" value="{{old('repository')}}">
+        @error('repository')
           <div class="invalid-feedback">
             {{$message}}
           </div>
         @enderror
-      </div>
+    </div>
 
 
 
