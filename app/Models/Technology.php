@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Technology extends Model
 {
     use HasFactory;
+    protected $fillable = ['name', 'description', 'slug', 'website'];
 
     public function projects()
     {

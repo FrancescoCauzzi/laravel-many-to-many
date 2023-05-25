@@ -43,6 +43,7 @@ class TechnologySeeder extends Seeder
         foreach ($technologies as $technology) {
             $newTech = new Technology();
             $newTech->name = $technology;
+            $newTech->slug = Str::slug($technology);
             $newTech->description = $faker->text(200);
             $newTech->website = $faker->url;
             $newTech->save();
