@@ -111,10 +111,11 @@ class ProjectController extends Controller
     {
         $this->validation($request);
 
-
         $formData = $request->all();
         $project->update($formData);
-        $project->slug = Str::slug($formData['name']); // Assign the slug value based on the 'name' attribute
+
+        // Assign the slug value based on the 'name' attribute
+        $project->slug = Str::slug($formData['name']);
 
         $project->save();
         // sync the technologies relative to the project in the pivot table
@@ -155,6 +156,7 @@ class ProjectController extends Controller
             'end_date' => 'required',
             'status' => 'required|max:20',
             'type_id' => 'nullable|exists:types,id',
+            'technologies' => 'exists:technologies,id',
 
 
         ], [
@@ -167,6 +169,7 @@ class ProjectController extends Controller
             'end_date.required' => "The end date must be inserted",
             'status.required' => "The status of the project must be inserted",
             'type_id.exists' => 'The project type must be selected',
+            'technologies.exists' => 'The project technology must be selected',
 
 
         ])->validate();

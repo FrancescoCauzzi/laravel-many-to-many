@@ -39,16 +39,20 @@
     <div class="mb-3">
         <h6>Technologies</h6>
         <div class="row">
-            @foreach ($technologies as $tech)
+            @foreach ($technologies as $technology)
             <div class="col-lg-3 col-md-6 col-sm-12">
                 <div class="form-check">
-                    <input type="checkbox" id="technology-{{$tech->id}}" name="technologies[]" value="{{$tech->id}}" @checked($project->technologies->contains($tech)) >
-                    <label for="technology-{{$tech->id}}">{{$tech->name}}</label>
+                    @if($errors->any())
+                        <input id="technology_{{$technology->id}}" name="technologies[]" type="checkbox" value="{{$technology->id}}" @checked(in_array($technology->id, old('technologies', [])))>
+                    @else
+                        <input id="technology_{{$technology->id}}" name="technologies[]" type="checkbox" value="{{$technology->id}}" @checked($project->technologies->contains($technology->id))>
+                    @endif
+                        <label for="technology-{{$technology->id}}">{{$technology->name}}</label>
                 </div>
             </div>
             @endforeach
         </div>
-        @error('technology_id')
+        @error('technologies')
         <div class="invalid-feedback">
           {{$message}}
         </div>
