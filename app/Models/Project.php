@@ -13,6 +13,7 @@ class Project extends Model
 
     public function type()
     {
+        // One-to-Many relationship between projects and types, each Project has only one Type
         return $this->belongsTo(Type::class);
     }
 
