@@ -58,11 +58,6 @@ class ProjectController extends Controller
 
         $newProject = new Project();
 
-
-
-
-
-
         if ($request->hasFile('cover_image')) {
             $path = Storage::put('project_images', $request->cover_image);
             $formData['cover_image'] = $path;
@@ -122,6 +117,19 @@ class ProjectController extends Controller
         $formData = $request->all();
         $this->validation($formData);
 
+        if ($request->hasFile('cover_image')) {
+            // does the image exist in the db? If yes we delete it
+            if ($project->cover_image) {
+                // delete old image
+                Storage::delete($project->cover_image);
+            }
+
+            //save new image
+            $path = Storage::put('project_images', $request->cover_image);
+
+            $formData['cover_image'] = $path;
+        }
+
         // Assign the slug value based on the 'name' attribute
         $project->slug = Str::slug($formData['name'], '-');
 
@@ -146,6 +154,10 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
+        // we need to check if our project has an image
+        if ($project->cover_image) {
+            Storage::delete($project->cover_image);
+        }
         $project->delete();
 
         return redirect()->route('admin.projects.index');

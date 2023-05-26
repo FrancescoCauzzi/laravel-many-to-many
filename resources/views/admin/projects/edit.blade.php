@@ -4,7 +4,7 @@
 <div class=" __create-ctn text-white">
   <h1>Edit this project</h1>
 
-  <form action="{{route('admin.projects.update', $project->slug)}}" method="POST" class="">
+  <form action="{{route('admin.projects.update', $project->slug)}}" method="POST" enctype="multipart/form-data">
     @csrf
     @method('PUT')
 
@@ -73,6 +73,16 @@
         <label for="repository">Repository</label>
         <input class="form-control @error('repository') is-invalid @enderror" type="text" id="repository" name="repository" value="{{old('repository') ?? $project->repository}}">
         @error('repository')
+          <div class="invalid-feedback">
+            {{$message}}
+          </div>
+        @enderror
+    </div>
+    {{-- file insertion down here here --}}
+    <div class="mb-3">
+        <label for="cover_image">Project image</label>
+        <input class="form-control @error('cover_image') is-invalid @enderror" type="file" id="cover_image" name="cover_image" value="{{old('cover_image')}}">
+        @error('cover_image')
           <div class="invalid-feedback">
             {{$message}}
           </div>

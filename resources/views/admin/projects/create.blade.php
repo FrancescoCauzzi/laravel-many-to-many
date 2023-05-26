@@ -73,7 +73,7 @@
           </div>
         @enderror
     </div>
-    {{-- insert the file here --}}
+    {{-- file insertion down here here --}}
     <div class="mb-3">
         <label for="cover_image">Project image</label>
         <input class="form-control @error('cover_image') is-invalid @enderror" type="file" id="cover_image" name="cover_image" value="{{old('cover_image')}}">
@@ -83,8 +83,6 @@
           </div>
         @enderror
     </div>
-
-
 
     <button type="submit" class="btn btn-primary fw-bold">Add Project</button>
 
