@@ -4,17 +4,21 @@
 <div class="container text-white d-flex flex-column gap-4">
     <h1 >{{ucfirst($project->name)}}</h1>
     <hr>
+
+    <div class="__proj-image">
+        <img src="" alt="">
+    </div>
+
     <div class="__proj-type">
         <h5>Project Type:</h5>
         <span>{{ $project->type->name ?? 'not specified'}}</span>
     </div>
-    @if (count($project->technologies) >0)
 
+    @if (count($project->technologies) >0)
     <div class="__proj-tech">
         <h5>Project Technologies:</h5>
         @foreach ($project->technologies as $tech )
         <span class="badge rounded-pill bg-primary">{{$tech->name}}</span>
-
         @endforeach
     </div>
     @endif

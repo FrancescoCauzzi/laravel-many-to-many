@@ -4,7 +4,8 @@
 <div class="container __create-ctn text-white">
   <h1>Add a project</h1>
 
-  <form action="{{route('admin.projects.store')}}" method="POST" class="py-5">
+  {{-- we need to tell to the form thet it has to accept files as well, we add  enctype="multipart/form-data" to the form tag--}}
+  <form action="{{route('admin.projects.store')}}" method="POST" class="py-5" enctype="multipart/form-data">
     @csrf
 
     <div class="mb-3">
@@ -71,7 +72,18 @@
             {{$message}}
           </div>
         @enderror
-      </div>
+    </div>
+    {{-- insert the file here --}}
+    <div class="mb-3">
+        <label for="cover_image">Project image</label>
+        <input class="form-control @error('cover_image') is-invalid @enderror" type="file" id="cover_image" name="cover_image" value="{{old('cover_image')}}">
+        @error('cover_image')
+          <div class="invalid-feedback">
+            {{$message}}
+          </div>
+        @enderror
+    </div>
+
 
 
     <button type="submit" class="btn btn-primary fw-bold">Add Project</button>

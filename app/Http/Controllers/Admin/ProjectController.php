@@ -10,6 +10,7 @@ use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
 use App\Models\Technology;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 // Str support module import
 use Illuminate\Support\Str;
@@ -57,11 +58,19 @@ class ProjectController extends Controller
 
         $newProject = new Project();
 
-        // we use the fill method to fill the model with the data from the request, in the model we must specify the fillable attributes
-        $newProject->fill($formData);
+
+
 
         // Assign the slug value based on the 'name' attribute
         $newProject->slug = Str::slug($formData['name']);
+
+        if ($request->hasFile('cover_image')) {
+            $path = Storage::put('project_images', $request->cover_image);
+            $formData['cover_image'] = $path;
+        };
+
+        // we use the fill method to fill the model with the data from the request, in the model we must specify the fillable attributes
+        $newProject->fill($formData);
 
         // save must be done before the pivot table insertion, because when we save the row in the db the id gets created
         $newProject->save();
@@ -149,8 +158,7 @@ class ProjectController extends Controller
             'repository' => 'required|max:255',
             'type_id' => 'nullable|exists:types,id',
             'technologies' => 'exists:technologies,id',
-
-
+            'cover_image' => 'nullable|image|max:4096'
         ], [
             // dobbiamo inserire qui un insieme di messaggi da comunicare all'utente per ogni errore che vogliamo modificare
             'name.required' => 'The project name must be inserted',
@@ -160,6 +168,8 @@ class ProjectController extends Controller
             'repository.max' => 'The link of the repository must be shorter than 255 characters',
             'type_id.exists' => 'The project type must be selected',
             'technologies.exists' => 'The project technology must be selected',
+            'cover_image.image' => 'The cover image must be an image file',
+            'cover_image.max' => 'The cover image must be shorter than 4096 kilobytes'
 
 
         ])->validate();
