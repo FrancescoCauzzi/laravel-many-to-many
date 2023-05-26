@@ -5,12 +5,13 @@
     <h1 >{{ucfirst($project->name)}}</h1>
     <hr>
     <div class="__proj-type">
-        <h6>Project Type: {{ $project->type->name ?? 'not specified'}}</h6>
+        <h5>Project Type:</h5>
+        <span>{{ $project->type->name ?? 'not specified'}}</span>
     </div>
     @if (count($project->technologies) >0)
 
     <div class="__proj-tech">
-        <h6>Project Technologies:</h6>
+        <h5>Project Technologies:</h5>
         @foreach ($project->technologies as $tech )
         <span class="badge rounded-pill bg-primary">{{$tech->name}}</span>
 
@@ -31,10 +32,6 @@
           <a href="{{$project->repository}}" target="_blank">Github</a>
         </div>
     </div>
-
-
-
-
 
     <div class="__btns-ctn d-flex gap-5">
 

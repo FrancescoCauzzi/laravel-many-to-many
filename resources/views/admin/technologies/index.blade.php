@@ -9,7 +9,7 @@
         <thead>
             <th>Name</th>
             <th>Description</th>
-            <th>Slug</th>
+            <th>Website</th>
             <th>Number of projects</th>
             <th>Show</th>
             <th>Edit</th>
@@ -19,7 +19,7 @@
             <tr>
                 <td>{{$technology->name}}</td>
                 <td>{{$technology->description}}</td>
-                <td>{{$technology->slug}}</td>
+                <td><a href="{{$technology->website}}">{{$technology->website}}</a></td>
                 <td class="text-center">{{count($technology->projects)}}</td>
                  <td class="text-center"><a href="{{route('admin.technologies.show', ['technology' => $technology])}}"><i class="fa-solid fa-magnifying-glass"></i></a>
                 </td>
