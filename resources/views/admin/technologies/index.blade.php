@@ -10,7 +10,7 @@
             <th>Name</th>
             <th>Description</th>
             <th>Website</th>
-            <th>Number of projects</th>
+            <th>N° of Projects</th>
             <th>Show</th>
             <th>Edit</th>
             <th>Delete</th>

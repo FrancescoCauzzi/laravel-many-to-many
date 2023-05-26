@@ -9,7 +9,7 @@
         <thead>
             <th>Name</th>
             <th>Description</th>
-            <th>Number of types</th>
+            <th>N* of projects</th>
             <th>Show</th>
             <th>Edit</th>
             <th>Delete</th>

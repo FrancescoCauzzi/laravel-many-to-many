@@ -4,11 +4,13 @@
 <div class="container text-white d-flex flex-column gap-4">
     <h1 >{{ucfirst($project->name)}}</h1>
     <hr>
+    @if ( $project->cover_image)
 
     <div class="__proj-image">
         <h5>Project Cover</h5>
         <img src="{{asset('storage/' . $project->cover_image)}}" alt="">
     </div>
+    @endif
 
     <div class="__proj-type">
         <h5>Project Type:</h5>
