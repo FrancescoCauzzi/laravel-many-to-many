@@ -6,7 +6,8 @@
     <hr>
 
     <div class="__proj-image">
-        <img src="" alt="">
+        <h5>Project Cover</h5>
+        <img src="{{asset('storage/' . $project->cover_image)}}" alt="">
     </div>
 
     <div class="__proj-type">

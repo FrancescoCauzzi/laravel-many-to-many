@@ -61,8 +61,7 @@ class ProjectController extends Controller
 
 
 
-        // Assign the slug value based on the 'name' attribute
-        $newProject->slug = Str::slug($formData['name']);
+
 
         if ($request->hasFile('cover_image')) {
             $path = Storage::put('project_images', $request->cover_image);
@@ -71,6 +70,9 @@ class ProjectController extends Controller
 
         // we use the fill method to fill the model with the data from the request, in the model we must specify the fillable attributes
         $newProject->fill($formData);
+
+        // Assign the slug value based on the 'name' attribute
+        $newProject->slug = Str::slug($formData['name']);
 
         // save must be done before the pivot table insertion, because when we save the row in the db the id gets created
         $newProject->save();
