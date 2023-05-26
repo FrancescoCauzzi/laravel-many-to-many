@@ -81,7 +81,7 @@
 
 
 
-    <button type="submit" class="btn btn-primary fw-bold text-uppercase">Edit this Project</button>
+    <button type="submit" class="btn btn-primary fw-bold">Edit this Project</button>
 
   </form>
 

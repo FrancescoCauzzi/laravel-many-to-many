@@ -17,7 +17,7 @@ function routeNameContains($string) {
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Boolfolio') }} &#x1F47D;</title>
 
 
     <!-- Fonts -->
