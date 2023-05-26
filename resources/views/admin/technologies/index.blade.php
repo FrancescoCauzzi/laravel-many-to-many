@@ -4,7 +4,7 @@
 @section('content')
 
 <div class="container py-2">
-    <h1 class="text-white">Here are all the technologys</h1>
+    <h1 class="text-white">Here are all the technologies</h1>
     <table class="text-white table">
         <thead>
             <th>Name</th>

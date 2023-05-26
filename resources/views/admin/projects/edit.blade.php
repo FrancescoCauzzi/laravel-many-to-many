@@ -71,7 +71,7 @@
 
     <div class="mb-3">
         <label for="repository">Repository</label>
-        <input class="form-control @error('repository') is-invalid @enderror" type="text" id="repository" name="repository" value="{{old('repository')}}">
+        <input class="form-control @error('repository') is-invalid @enderror" type="text" id="repository" name="repository" value="{{old('repository') ?? $project->repository}}">
         @error('repository')
           <div class="invalid-feedback">
             {{$message}}
