@@ -157,6 +157,7 @@ class ProjectController extends Controller
         //dd($project);
         // we need to check if our project has an image
         if ($project->cover_image) {
+            // delete the image kept in the storage classInstance
             Storage::delete($project->cover_image);
         }
         $project->delete();
